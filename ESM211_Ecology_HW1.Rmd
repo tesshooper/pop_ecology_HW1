@@ -1,0 +1,22 @@
+---
+title: "Population Ecology HW1"
+author: "Tess Hooper"
+date: "1/15/2020"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Question 1. Why might a plant or animal be patchily distributed? 
+1. Availability of resources (e.g. water, food) might affect where plants or animals are distributed. In this case I would expect the location of high-density patches to be inconsistent from year to year, as the resources may change. For instance, if certain foraging plants are abundant in one area, then that is where we might find ungulates in a given year. However, if they deplete that resource then that group of ungulates may need to move locations. 
+
+```{r load packages, echo = FALSE, message = FALSE}
+
+library(tidyverse)
+
+```
+
