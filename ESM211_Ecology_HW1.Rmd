@@ -29,3 +29,5 @@ grizzly <- read_csv("grizzlydata.csv")
 
 ```
 
+# Question 2. Eureka Dune Grass Populations
+## a. 
