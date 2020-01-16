@@ -26,6 +26,84 @@ library(tidyverse)
 
 swallenia <- read_csv("Swallenia.csv")
 grizzly <- read_csv("grizzlydata.csv")
+swallenia2 <- read_csv("Swallenia (1).csv")
+
+```
+
+<br>
+
+# Question 2: Eureaka Dune Grass
+```{r, A: two-sample t-test, echo = FALSE, message = FALSE}
+
+# A. Change in mean abundance from 2009 to 2010 using a two-sample t-test
+
+
+swallenia_ttest <- t.test(swallenia2$count_2009, swallenia2$count_2010)
+
+swallenia_ttest
+
+## This is a t-test using the counts. Need to get mean abundance for each year? 
+
+## Results:
+
+#data:  swallenia2$count_2009 and swallenia2$count_2010
+#t = -0.81791, df = 17.37, p-value = 0.4245
+#alternative hypothesis: true difference in means is not equal to 0
+#95 percent confidence interval:
+# -141.06385   62.15476
+#sample estimates:
+#mean of x mean of y 
+# 61.90909 101.36364 
+
+```
+
+<br>
+
+```{r, B: two-sample paired t-test, echo = FALSE, message = FALSE }
+
+# B. Change in mean abundance using a paired two sample t-test
+
+
+
+
+```
+
+C. Which analysis is more appropriate? 
+
+<br>
+
+D. Paragraph to the park superintendant describing my findings
+
+<br>
+<br>
+
+# Question 3: Yellowstone Grizzly Bears
+```{r, A: bear population, echo = FALSE, message = FALSE}
+
+# A. Did the grizzly population decline between 1959 - 1968? Use a linear regression? 
+
+
+
+
+```
+
+<br>
+
+```{r, B: rate of decline, echo = FALSE, message=FALSE}
+
+# B. Did the population continue to decline from 1969 to 1978? Was the decline faster than the period prior to the dump closures? 
+
+
+
+```
+
+<br>
+
+```{r, C: magnitude of populatio trends, echo=FALSE, message=FALSE}
+
+# C. Did the population size continue to change after 1978? What was the direction and magnitude of the trend? 
+
+
 
 ```
 
