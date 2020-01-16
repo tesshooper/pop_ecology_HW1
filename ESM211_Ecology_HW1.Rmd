@@ -13,7 +13,8 @@ knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
 
 # Question 1. Why might a plant or animal be patchily distributed? 
 1. Availability of resources (e.g. water, food) might affect where plants or animals are distributed. In this case I would expect the location of high-density patches to be inconsistent from year to year, as the resources may change. For instance, if certain foraging plants are abundant in one area, then that is where we might find ungulates in a given year. However, if they deplete that resource then that group of ungulates may need to move locations. 
-2. 
+2. Predation is another factor that affects many species. Prey species may form patchy groups to avoid predation. If resources remain consistent then I would expect high density areas to remain similar from year to year. 
+
 3. 
 
 ```{r load packages, echo = FALSE, message = FALSE, warning=FALSE}
@@ -32,7 +33,8 @@ swallenia2 <- read_csv("Swallenia (1).csv")
 <br>
 
 # Question 2: Eureaka Dune Grass
-```{r, A: two-sample t-test, echo = FALSE, message = FALSE}
+A. For this analysis I chose 0.05 as my alpha value because this is a common standard that we have used in the past (e.g. Allison's class). The t-test resulted in a p-value of 0.4245. Based on this analysis, there was no significant change in mean abundance of Swallenia between 2009 and 2010, since this p-value was greater than 0.05.
+```{r, A: two-sample t-test, echo = FALSE, message = FALSE, results=TRUE}
 
 # A. Change in mean abundance from 2009 to 2010 using a two-sample t-test
 
@@ -63,20 +65,42 @@ swallenia_ttest
 ## For this analysis I chose 0.05 as my alpha value because this is a common standard that we have used in the past (e.g. Allison's class). The t-test resulted in a p-value of 0.4245. Based on this analysis, there was no significant change in mean abundance of Swallenia between 2009 and 2010, since this p-value was greater than 0.05. 
 
 ```
-For this analysis I chose 0.05 as my alpha value because this is a common standard that we have used in the past (e.g. Allison's class). The t-test resulted in a p-value of 0.4245. Based on this analysis, there was no significant change in mean abundance of Swallenia between 2009 and 2010, since this p-value was greater than 0.05.
 
 <br>
 
-```{r, B: two-sample paired t-test, echo = FALSE, message = FALSE }
+B. When conducting a two-sided paired t-test, the resulting p-value is 0.03421. This gives us enough evidence to reject the null hypothesis, meaning we have sufficient evidence to suggest that there is a significant difference in mean abundance between 2009 and 2010. The mean of the differences is -39.45, indicating that there was a decline in mean abudnace between the two years. 
 
-# B. Change in mean abundance using a paired two sample t-test
+```{r, B: two-sample paired t-test, echo = FALSE, message = FALSE, results = TRUE }
+
+# B. Change in mean abundance using a PAIRED two sample t-test
+
+swall_paired_ttest <- t.test(swallenia2$count_2009, swallenia2$count_2010, paired = TRUE)
+
+swall_paired_ttest
+
+# Null Hypothesis: There is no significant change in means between 2009 - 2010
+# Altnerative Hypothesis: There is a significance change in means between 2009 - 2010
+
+## If p-value is greater than 0.05 (alpha) then we accept the null. If it is less than 0.05 we reject the null. 
 
 
+#### RESULTS ####
 
+#data:  swallenia2$count_2009 and swallenia2$count_2010
+#t = -2.4508, df = 10, p-value = 0.03421
+#alternative hypothesis: true difference in means is not equal to 0
+#95 percent confidence interval:
+# -75.324830  -3.584261
+#sample estimates:
+#mean of the differences 
+#              -39.45455 
+
+
+# When conducting a two-sided paired t-test, the resulting p-value is 0.03421. This gives us enough evidence to reject the null hypothesis, meaning we have sufficient evidence to suggest that there is a significant difference in mean abundance between 2009 and 2010. The mean of the differences is -39.45, indicating that there was a decline in mean abudnace between the two years. 
 
 ```
 
-C. Which analysis is more appropriate? 
+C. I believe the paired t-test is more appropriate for this analysis.  **********
 
 <br>
 
@@ -90,6 +114,48 @@ D. Paragraph to the park superintendant describing my findings
 
 # A. Did the grizzly population decline between 1959 - 1968? Use a linear regression? 
 
+#Explore the data 
+grizzlyplot <- ggplot (data = grizzly, aes(x = Year, y = N)) +
+  geom_point()
+
+grizzlyplot
+
+# Pull out years 1959 - 1968
+grizzly68 <- filter(grizzly, Year == c(1959:1968))
+
+# Plot 1959 - 1968 
+plot_68 <-   ggplot(data = grizzly68, aes(x = Year, y = N)) +
+  geom_line()
+
+plot_68
+
+# Do a linear regression to see if the population significantly declined between 1959 - 1968
+grizzly_lm <- lm(Year ~ N, data = grizzly68)
+summary(grizzly_lm)
+
+#### RESULTS ####
+
+#Call:
+#lm(formula = Year ~ N, data = grizzly68)
+
+#Residuals:
+#    Min      1Q  Median      3Q     Max 
+#-4.2083 -0.9531  0.0104  1.2240  3.2500 
+
+#Coefficients:
+#             Estimate Std. Error t value Pr(>|t|)    
+#(Intercept) 1995.2917    10.0505  198.53 4.64e-16 ***
+#N             -0.7292     0.2300   -3.17   0.0132 *  
+#---
+#Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#Residual standard error: 2.138 on 8 degrees of freedom
+#Multiple R-squared:  0.5568,	Adjusted R-squared:  0.5014 
+#F-statistic: 10.05 on 1 and 8 DF,  p-value: 0.01319
+
+
+grizzly_lm_tidy <- broom::tidy(grizzly_lm)
+grizzly_lm_tidy
 
 
 
