@@ -3,8 +3,8 @@ title: "Population Ecology HW1"
 author: "Tess Hooper"
 date: "1/15/2020"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -24,7 +24,6 @@ library(tidyverse)
 
 ```{r read in data, echo = FALSE, message = FALSE}
 
-swallenia <- read_csv("Swallenia.csv")
 grizzly <- read_csv("grizzlydata.csv")
 swallenia2 <- read_csv("Swallenia (1).csv")
 
@@ -107,5 +106,4 @@ D. Paragraph to the park superintendant describing my findings
 
 ```
 
-# Question 2. Eureka Dune Grass Populations
-## a. 
+
