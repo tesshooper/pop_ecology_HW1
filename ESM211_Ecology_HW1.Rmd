@@ -8,7 +8,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
 ```
 
 # Question 1. Why might a plant or animal be patchily distributed? 
@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 2. 
 3. 
 
-```{r load packages, echo = FALSE, message = FALSE}
+```{r load packages, echo = FALSE, message = FALSE, warning=FALSE}
 
 library(tidyverse)
 
@@ -41,9 +41,13 @@ swallenia_ttest <- t.test(swallenia2$count_2009, swallenia2$count_2010)
 
 swallenia_ttest
 
-## This is a t-test using the counts. Need to get mean abundance for each year? 
+# Null Hypothesis: There is no significant change in means between 2009 - 2010
+# Altnerative Hypothesis: There is a significance change in means between 2009 - 2010
 
-## Results:
+## If p-value is greater than 0.05 (alpha) then we accept the null. If it is less than 0.05 we reject the null. 
+
+
+#### Results ####
 
 #data:  swallenia2$count_2009 and swallenia2$count_2010
 #t = -0.81791, df = 17.37, p-value = 0.4245
@@ -54,7 +58,12 @@ swallenia_ttest
 #mean of x mean of y 
 # 61.90909 101.36364 
 
+#### Answer ####
+
+## For this analysis I chose 0.05 as my alpha value because this is a common standard that we have used in the past (e.g. Allison's class). The t-test resulted in a p-value of 0.4245. Based on this analysis, there was no significant change in mean abundance of Swallenia between 2009 and 2010, since this p-value was greater than 0.05. 
+
 ```
+For this analysis I chose 0.05 as my alpha value because this is a common standard that we have used in the past (e.g. Allison's class). The t-test resulted in a p-value of 0.4245. Based on this analysis, there was no significant change in mean abundance of Swallenia between 2009 and 2010, since this p-value was greater than 0.05.
 
 <br>
 
