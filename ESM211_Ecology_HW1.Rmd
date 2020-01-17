@@ -3,15 +3,15 @@ title: "Population Ecology HW1"
 author: "Tess Hooper"
 date: "1/15/2020"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
 ```
 
-## Question 1. Why might a plant or animal be patchily distributed? 
+## Question 1. 
 * Availability of resources (e.g. water, food) will affect where plants or animals are distributed. In this case I would expect the location of high-density patches to be inconsistent from year to year, as the resources may change. For instance, if certain foraging plants are abundant in one area, then that is where we might find ungulates in a given year. However, if they deplete that resource then that group of ungulates may need to move locations. 
 * Predation is another factor that affects many species. Prey species may form patchy groups to avoid predation. If resources remain consistent then I would expect high density areas to remain similar from year to year. 
 
@@ -32,7 +32,10 @@ swallenia2 <- read_csv("Swallenia (1).csv")
 
 <br>
 
-## Question 2: Eureaka Dune Grass
+# Eurkea Dune Grass 
+<br>
+
+## Question 2. 
 ```{r, A: two-sample t-test, echo = FALSE, message = FALSE}
 
 # A. Change in mean abundance from 2009 to 2010 using a two-sample t-test
@@ -64,13 +67,13 @@ swallenia_ttest
 ## For this analysis I chose 0.05 as my alpha value because this is a common standard that we have used in the past (e.g. Allison's class). The t-test resulted in a p-value of 0.4245. Based on this analysis, there was no significant change in mean abundance of Swallenia between 2009 and 2010, since this p-value was greater than 0.05. 
 
 ```
-A. For this analysis I chose $\alpha = 0.05$ value because this is a common standard that we have used in the past (e.g. Allison's class). The t-test results show (p = `r round(swallenia_ttest$p.value, 2)`). Based on this analysis, there was no significant change in mean abundance of Swallenia between 2009 and 2010, since this p-value was greater than 0.05.
+For this analysis I chose $\alpha = 0.05$ value because this is a common standard that we have used in the past. This significance level signifies a 5% risk of concluding that a difference exists when there is actually no difference. The t-test results show (p = `r round(swallenia_ttest$p.value, 2)`). Based on this analysis, there was no significant change in mean abundance of Swallenia between 2009 and 2010, since this p-value was greater than 0.05.
 
 
 <br>
 
 
-
+## Question 3. 
 ```{r, B: two-sample paired t-test, echo = FALSE, message = FALSE, results = TRUE }
 
 # B. Change in mean abundance using a PAIRED two sample t-test
@@ -100,23 +103,27 @@ swall_paired_ttest
 # When conducting a two-sided paired t-test, the resulting p-value is 0.03421. This gives us enough evidence to reject the null hypothesis, meaning we have sufficient evidence to suggest that there is a significant difference in mean abundance between 2009 and 2010. The mean of the differences is -39.45, indicating that there was a decline in mean abudnace between the two years. 
 
 ```
-B. When conducting a two-sided paired t-test, the resulting p-value is 0.03421. This gives us enough evidence to reject the null hypothesis, meaning we have sufficient evidence to suggest that there is a significant difference in mean abundance between 2009 and 2010. The mean of the differences is -39.45, indicating that there was a decline in mean abudnace between the two years. 
+When conducting a two-sided paired t-test, the resulting p-value is 0.03421. This gives us enough evidence to reject the null hypothesis, meaning we have sufficient evidence to suggest that there is a significant difference in mean abundance between 2009 and 2010. The mean of the differences is -39.45, indicating that there was a decline in mean abudnace between the two years. 
 
 <br>
 
-C. I believe the paired t-test is more appropriate for this analysis because the plants are counted in the same plots each year. Therefore, the count for year 2 in a plot would be associated with the count from year 1 in the same plot. That being said, there may be additional growth in some plots due to seed dispersal from surrounding plots (depending on how the Eureka dunes proliferate). 
+## Question 4.
+I believe the paired t-test is more appropriate for this analysis because the plants are counted in the same plots each year. Therefore, the count for year 2 in a plot would be associated with the count from year 1 in the same plot. That being said, there may be additional growth in some plots due to seed dispersal from surrounding plots (depending on how the Eureka dunes proliferate). 
 
 
 <br>
 
-D. Letter to Superintendant of Death Valley National Park. 
+## Question 5.   
 Dear Park Superintendant,
-  Upon evaluating the population of Eureka dune grass on Saline Dune between 2009 and 2010, I have concluded that there was a statistically significant decline in dune mean abundance. My team and I counted dune abundance within 11 plots across the dune study area throughout the 2009 and 2010. 
+\parindent  Upon evaluating the population of Eureka dune grass on Saline Dune between 2009 and 2010, I have concluded that there was a significant decline in dune mean abundance. My team and I counted dune abundance within 11 plots across the dune study area throughout the 2009 and 2010. Our results from a paired t-test statistical analysis indicate a statistical difference in mean abundance between the study period. The park should continue to monitor the Eureka dune grass populations so we can get a more robust dataset. 
 
 <br>
 <br>
 
-# Question 3: Yellowstone Grizzly Bears
+# Yellowstone Grizzly Bears
+<br>
+
+# Question 6.
 ```{r, A: bear population, echo = FALSE, message = FALSE}
 
 # A. Did the grizzly population decline between 1959 - 1968? Use a linear regression? 
@@ -128,64 +135,188 @@ grizzlyplot <- ggplot (data = grizzly, aes(x = Year, y = N)) +
 grizzlyplot
 
 # Pull out years 1959 - 1968
-grizzly68 <- filter(grizzly, Year == c(1959:1968))
+grizzly_68 <- grizzly %>% 
+  filter(between(Year, 1959, 1968))
 
 # Plot 1959 - 1968 
-plot_68 <-   ggplot(data = grizzly68, aes(x = Year, y = N)) +
+plot_68 <-   ggplot(data = grizzly_68, aes(x = Year, y = N)) +
   geom_line()
 
 plot_68
 
 # Do a linear regression to see if the population significantly declined between 1959 - 1968
-grizzly_lm <- lm(Year ~ N, data = grizzly68)
+grizzly_lm <- lm(N ~ Year, data = grizzly_68)
 summary(grizzly_lm)
 
 #### RESULTS ####
 
 #Call:
-#lm(formula = Year ~ N, data = grizzly68)
+#lm(formula = N ~ Year, data = grizzly68)
 
 #Residuals:
 #    Min      1Q  Median      3Q     Max 
-#-4.2083 -0.9531  0.0104  1.2240  3.2500 
+#-3.0364 -1.5591 -0.1273  1.5182  3.5455 
 
 #Coefficients:
-#             Estimate Std. Error t value Pr(>|t|)    
-#(Intercept) 1995.2917    10.0505  198.53 4.64e-16 ***
-#N             -0.7292     0.2300   -3.17   0.0132 *  
+#             Estimate Std. Error t value Pr(>|t|)  
+#(Intercept) 1543.0000   472.9413   3.263   0.0115 *
+#Year          -0.7636     0.2409  -3.170   0.0132 *
 #---
 #Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-#Residual standard error: 2.138 on 8 degrees of freedom
+#Residual standard error: 2.188 on 8 degrees of freedom
 #Multiple R-squared:  0.5568,	Adjusted R-squared:  0.5014 
 #F-statistic: 10.05 on 1 and 8 DF,  p-value: 0.01319
+
+
+#### EQUATION ####
+
+# N (grizzlies) = 1543 - 0.7636(Year) 
+# y = -0.7636 + 1543
+
+#summary function
+grizzly_lm_sum <- summary(grizzly_lm)
+grizzly_lm_sum
+# Standard Error = 2.188 
+# P-value = 0.01319
 
 
 grizzly_lm_tidy <- broom::tidy(grizzly_lm)
 grizzly_lm_tidy
 
+#### PLOT DATA ####
+grizzly_68_plot <- ggplot(grizzly_68, aes(x = Year, y = N)) +
+  geom_point() +
+  geom_smooth(method = lm, se = T, size = 0.5) +
+  theme_bw() +
+  scale_x_continuous(expand = c(0,0), limits = c(1958, 1969)) +
+  labs(x = "Year", y = "Abundance of Grizzly Bears") +
+  ggtitle("Abundance of Female Grizzlies with Cubs in Yellowstone National Park")
 
+grizzly_68_plot
 
 ```
+The linear regression indicates that there was a significant decline in bear population between 1959 and 1968. The rate at which the bears declined was 0.7636 bears per year. The equation for the model is $Abundance~of~Grizzly~Bears = -0.7636*Year + 1543$. The results from the linear regression show a standard error of 2.188 and p-value of 0.013. When looking at the graph, the results seem to make sense. There is seemingly a drastic decline between 1965 and 1966 especially. 
 
 <br>
 
+## Question 7. 
 ```{r, B: rate of decline, echo = FALSE, message=FALSE}
 
-# B. Did the population continue to decline from 1969 to 1978? Was the decline faster than the period prior to the dump closures? 
+### B. Did the population continue to decline from 1969 to 1978? Was the decline faster than the period prior to the dump closures? 
+
+## Filter grizzly data for years 1969 - 1978
+
+grizzly_78 <- grizzly %>% 
+  filter(between(Year, 1969, 1978))
+
+## Exploratory plot
+grizzly_78_plot <- ggplot(data = grizzly_78, aes(x = Year, y = N)) +
+  geom_point()
+grizzly_78_plot
+# Generally negative but many outliers
 
 
+## Linear regression 
+grizzly_78_lm <- lm(N ~ Year, data = grizzly_78)
+
+grizzly_78_lm
+
+
+## Explore model fit and significance
+summary(grizzly_78_lm)
+
+# Standard error = 2.469
+# P-value = 0.02365
+
+# Tidy results
+grizzly_78_tidy <- broom::tidy(grizzly_78_lm)
+grizzly_78_tidy
+
+
+### RESULTS ###
+
+# intercept = 1532.3758
+# Year = - 0.7576
+# Grizzly population = -0.7576 + 1532.3758
+
+
+
+### PLOT ####
+
+grizzly_78_finalplot <- ggplot(grizzly_78, aes(x = Year, y = N)) +
+  geom_point() +
+  geom_smooth(method = lm, se = T, size = 0.5) +
+  theme_bw() +
+  scale_x_continuous(expand = c(0,0), limits = c(1968, 1978)) +
+  labs(x = "Year", y = "Abundance of Grizzly Bears") +
+  ggtitle("Abundance of Female Grizzlies with Cubs in Yellowstone National Park")
+
+grizzly_78_finalplot
 
 ```
+The linear regression indicates that there was a significant decline in bear population between 1969 and 1978. The rate at which the bears declined was 0.7576 bears per year. The equation for the model is $Abundance~of~Grizzly~Bears = -0.7576*Year + 1532$. The results from the linear regression show a standard error of 2.469 and p-value of 0.02. When comparing the results from 1959-1968 and 1969-1978, the bear population continued to decline at a similar rate (1969-1978 was slightly slower). Because the standard error bars overlap, there was no significant difference in decline between the two time periods. 
+
 
 <br>
 
+## Question 8. 
 ```{r, C: magnitude of populatio trends, echo=FALSE, message=FALSE}
 
 # C. Did the population size continue to change after 1978? What was the direction and magnitude of the trend? 
 
+# Filter data for 1979 - 1997
+
+grizzly_97 <- grizzly %>% 
+  filter(between(Year, 1979, 1997))
+
+# Exploratory plot 
+grizzly_97_plot <- ggplot(data = grizzly_97, aes(x = Year, y = N)) +
+  geom_point()
+grizzly_97_plot
+# Positive 
 
 
+## Linear regression 
+grizzly_97_lm <- lm(N ~ Year, data = grizzly_97)
+
+grizzly_97_lm
+
+
+## Explore model fit and significance
+summary(grizzly_97_lm)
+
+# Standard error = 7.817
+# P-value = 2.667e-08
+
+# Tidy results
+grizzly_97_tidy <- broom::tidy(grizzly_97_lm)
+grizzly_97_tidy
+
+
+### RESULTS ###
+
+# intercept = -6211.2877
+# Year = 3.15
+# Grizzly population = 3.15 - 6211.2877
+
+
+### PLOT ####
+
+grizzly_97_finalplot <- ggplot(grizzly_97, aes(x = Year, y = N)) +
+  geom_point() +
+  geom_smooth(method = lm, se = T, size = 0.5) +
+  theme_bw() +
+  scale_x_continuous(expand = c(0,0), limits = c(1978, 1998)) +
+  labs(x = "Year", y = "Abundance of Grizzly Bears") +
+  ggtitle("Abundance of Female Grizzlies with Cubs in Yellowstone National Park")
+
+grizzly_97_finalplot
 ```
+The linear regression indicates that there was a significant increase in bear population between 1979 and 1997. The rate at which the bears inceased was 3.15 bears per year. The equation for the model is $Abundance~of~Grizzly~Bears = 3.15*Year - 6211$. The results from the linear regression show a standard error of 7.817 and p-value of 2.667e-08. 
 
+<br>
 
+## Question 9. 
+Dear Park Superintendant, 
+\parindent Following the dump closures in the park between 1968 and 1971, there was a significant decline in grizzly bear populations, specifically adult females with cubs, between 1959-1978. This could have been due to the sudden decrease in resources for the bears (e.g. food). However, between 1979-1997, about 10 years after the dump closures there began an increase in bear populations. While this is a promising sign, continued bear population monitoring is encouraged, particularly as the park becomes more and more popular with tourists. 

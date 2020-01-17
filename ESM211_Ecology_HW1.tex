@@ -1,0 +1,385 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Population Ecology HW1},
+            pdfauthor={Tess Hooper},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Population Ecology HW1}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Tess Hooper}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{1/15/2020}
+
+
+\begin{document}
+\maketitle
+
+\hypertarget{question-1.}{%
+\subsection{Question 1.}\label{question-1.}}
+
+\begin{itemize}
+\item
+  Availability of resources (e.g.~water, food) will affect where plants
+  or animals are distributed. In this case I would expect the location
+  of high-density patches to be inconsistent from year to year, as the
+  resources may change. For instance, if certain foraging plants are
+  abundant in one area, then that is where we might find ungulates in a
+  given year. However, if they deplete that resource then that group of
+  ungulates may need to move locations.
+\item
+  Predation is another factor that affects many species. Prey species
+  may form patchy groups to avoid predation. If resources remain
+  consistent then I would expect high density areas to remain similar
+  from year to year.
+\item
+  Plants are static and therefore cannot move patches. Depending on
+  their seed dispersal capabilities, the patches will remain relatively
+  the same year to year.
+\end{itemize}
+
+\hypertarget{eurkea-dune-grass}{%
+\section{Eurkea Dune Grass}\label{eurkea-dune-grass}}
+
+\hypertarget{question-2.}{%
+\subsection{Question 2.}\label{question-2.}}
+
+\begin{verbatim}
+## 
+##  Two Sample t-test
+## 
+## data:  swallenia2$count_2009 and swallenia2$count_2010
+## t = -0.81791, df = 20, p-value = 0.423
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -140.07803   61.16893
+## sample estimates:
+## mean of x mean of y 
+##  61.90909 101.36364
+\end{verbatim}
+
+For this analysis I chose \(\alpha = 0.05\) value because this is a
+common standard that we have used in the past. This significance level
+signifies a 5\% risk of concluding that a difference exists when there
+is actually no difference. The t-test results show (p = 0.42). Based on
+this analysis, there was no significant change in mean abundance of
+Swallenia between 2009 and 2010, since this p-value was greater than
+0.05.
+
+\hypertarget{question-3.}{%
+\subsection{Question 3.}\label{question-3.}}
+
+\begin{verbatim}
+## 
+##  Paired t-test
+## 
+## data:  swallenia2$count_2009 and swallenia2$count_2010
+## t = -2.4508, df = 10, p-value = 0.03421
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -75.324830  -3.584261
+## sample estimates:
+## mean of the differences 
+##               -39.45455
+\end{verbatim}
+
+When conducting a two-sided paired t-test, the resulting p-value is
+0.03421. This gives us enough evidence to reject the null hypothesis,
+meaning we have sufficient evidence to suggest that there is a
+significant difference in mean abundance between 2009 and 2010. The mean
+of the differences is -39.45, indicating that there was a decline in
+mean abudnace between the two years.
+
+\hypertarget{question-4.}{%
+\subsection{Question 4.}\label{question-4.}}
+
+I believe the paired t-test is more appropriate for this analysis
+because the plants are counted in the same plots each year. Therefore,
+the count for year 2 in a plot would be associated with the count from
+year 1 in the same plot. That being said, there may be additional growth
+in some plots due to seed dispersal from surrounding plots (depending on
+how the Eureka dunes proliferate).
+
+\hypertarget{question-5.}{%
+\subsection{Question 5.}\label{question-5.}}
+
+Dear Park Superintendant, \parindent  Upon evaluating the population of
+Eureka dune grass on Saline Dune between 2009 and 2010, I have concluded
+that there was a significant decline in dune mean abundance. My team and
+I counted dune abundance within 11 plots across the dune study area
+throughout the 2009 and 2010. Our results from a paired t-test
+statistical analysis indicate a statistical difference in mean abundance
+between the study period. The park should continue to monitor the Eureka
+dune grass populations so we can get a more robust dataset.
+
+\hypertarget{yellowstone-grizzly-bears}{%
+\section{Yellowstone Grizzly Bears}\label{yellowstone-grizzly-bears}}
+
+\hypertarget{question-6.}{%
+\section{Question 6.}\label{question-6.}}
+
+\includegraphics{ESM211_Ecology_HW1_files/figure-latex/A: bear population-1.pdf}
+\includegraphics{ESM211_Ecology_HW1_files/figure-latex/A: bear population-2.pdf}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = N ~ Year, data = grizzly_68)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.0364 -1.5591 -0.1273  1.5182  3.5455 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)  
+## (Intercept) 1543.0000   472.9413   3.263   0.0115 *
+## Year          -0.7636     0.2409  -3.170   0.0132 *
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 2.188 on 8 degrees of freedom
+## Multiple R-squared:  0.5568, Adjusted R-squared:  0.5014 
+## F-statistic: 10.05 on 1 and 8 DF,  p-value: 0.01319
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = N ~ Year, data = grizzly_68)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.0364 -1.5591 -0.1273  1.5182  3.5455 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)  
+## (Intercept) 1543.0000   472.9413   3.263   0.0115 *
+## Year          -0.7636     0.2409  -3.170   0.0132 *
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 2.188 on 8 degrees of freedom
+## Multiple R-squared:  0.5568, Adjusted R-squared:  0.5014 
+## F-statistic: 10.05 on 1 and 8 DF,  p-value: 0.01319
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 2 x 5
+##   term        estimate std.error statistic p.value
+##   <chr>          <dbl>     <dbl>     <dbl>   <dbl>
+## 1 (Intercept) 1543.      473.         3.26  0.0115
+## 2 Year          -0.764     0.241     -3.17  0.0132
+\end{verbatim}
+
+\includegraphics{ESM211_Ecology_HW1_files/figure-latex/A: bear population-3.pdf}
+The linear regression indicates that there was a significant decline in
+bear population between 1959 and 1968. The rate at which the bears
+declined was 0.7636 bears per year. The equation for the model is
+\(Abundance~of~Grizzly~Bears = -0.7636*Year + 1543\). The results from
+the linear regression show a standard error of 2.188 and p-value of
+0.013. When looking at the graph, the results seem to make sense. There
+is seemingly a drastic decline between 1965 and 1966 especially.
+
+\hypertarget{question-7.}{%
+\subsection{Question 7.}\label{question-7.}}
+
+\includegraphics{ESM211_Ecology_HW1_files/figure-latex/B: rate of decline-1.pdf}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = N ~ Year, data = grizzly_78)
+## 
+## Coefficients:
+## (Intercept)         Year  
+##   1532.3758      -0.7576
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = N ~ Year, data = grizzly_78)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.6788 -0.9439  0.2303  1.4955  3.5939 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)  
+## (Intercept) 1532.3758   536.3641   2.857   0.0213 *
+## Year          -0.7576     0.2718  -2.787   0.0237 *
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 2.469 on 8 degrees of freedom
+## Multiple R-squared:  0.4927, Adjusted R-squared:  0.4293 
+## F-statistic:  7.77 on 1 and 8 DF,  p-value: 0.02365
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 2 x 5
+##   term        estimate std.error statistic p.value
+##   <chr>          <dbl>     <dbl>     <dbl>   <dbl>
+## 1 (Intercept) 1532.      536.         2.86  0.0213
+## 2 Year          -0.758     0.272     -2.79  0.0237
+\end{verbatim}
+
+\includegraphics{ESM211_Ecology_HW1_files/figure-latex/B: rate of decline-2.pdf}
+\includegraphics{ESM211_Ecology_HW1_files/figure-latex/B: rate of decline-3.pdf}
+\includegraphics{ESM211_Ecology_HW1_files/figure-latex/B: rate of decline-4.pdf}
+\includegraphics{ESM211_Ecology_HW1_files/figure-latex/B: rate of decline-5.pdf}
+\includegraphics{ESM211_Ecology_HW1_files/figure-latex/B: rate of decline-6.pdf}
+The linear regression indicates that there was a significant decline in
+bear population between 1969 and 1978. The rate at which the bears
+declined was 0.7576 bears per year. The equation for the model is
+\(Abundance~of~Grizzly~Bears = -0.7576*Year + 1532\). The results from
+the linear regression show a standard error of 2.469 and p-value of
+0.02. When comparing the results from 1959-1968 and 1969-1978, the bear
+population continued to decline at a similar rate (1969-1978 was
+slightly slower). Because the standard error bars overlap, there was no
+significant difference in decline between the two time periods.
+
+\hypertarget{question-8.}{%
+\subsection{Question 8.}\label{question-8.}}
+
+\includegraphics{ESM211_Ecology_HW1_files/figure-latex/C: magnitude of populatio trends-1.pdf}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = N ~ Year, data = grizzly_97)
+## 
+## Coefficients:
+## (Intercept)         Year  
+##   -6211.288        3.154
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = N ~ Year, data = grizzly_97)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -18.4035  -4.0140   0.2947   3.8316  14.1333 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -6211.2877   650.9227  -9.542 3.06e-08 ***
+## Year            3.1544     0.3274   9.634 2.67e-08 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 7.817 on 17 degrees of freedom
+## Multiple R-squared:  0.8452, Adjusted R-squared:  0.8361 
+## F-statistic: 92.81 on 1 and 17 DF,  p-value: 2.667e-08
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 2 x 5
+##   term        estimate std.error statistic      p.value
+##   <chr>          <dbl>     <dbl>     <dbl>        <dbl>
+## 1 (Intercept) -6211.     651.        -9.54 0.0000000306
+## 2 Year            3.15     0.327      9.63 0.0000000267
+\end{verbatim}
+
+\includegraphics{ESM211_Ecology_HW1_files/figure-latex/C: magnitude of populatio trends-2.pdf}
+\includegraphics{ESM211_Ecology_HW1_files/figure-latex/C: magnitude of populatio trends-3.pdf}
+\includegraphics{ESM211_Ecology_HW1_files/figure-latex/C: magnitude of populatio trends-4.pdf}
+\includegraphics{ESM211_Ecology_HW1_files/figure-latex/C: magnitude of populatio trends-5.pdf}
+\includegraphics{ESM211_Ecology_HW1_files/figure-latex/C: magnitude of populatio trends-6.pdf}
+The linear regression indicates that there was a significant increase in
+bear population between 1979 and 1997. The rate at which the bears
+inceased was 3.15 bears per year. The equation for the model is
+\(Abundance~of~Grizzly~Bears = 3.15*Year - 6211\). The results from the
+linear regression show a standard error of 7.817 and p-value of
+2.667e-08.
+
+\hypertarget{question-9.}{%
+\subsection{Question 9.}\label{question-9.}}
+
+Dear Park Superintendant, \parindent Following the dump closures in the
+park between 1968 and 1971, there was a significant decline in grizzly
+bear populations, specifically adult females with cubs, between
+1959-1978. This could have been due to the sudden decrease in resources
+for the bears (e.g.~food). However, between 1979-1997, about 10 years
+after the dump closures there began an increase in bear populations.
+While this is a promising sign, continued bear population monitoring is
+encouraged, particularly as the park becomes more and more popular with
+tourists.
+
+
+\end{document}
