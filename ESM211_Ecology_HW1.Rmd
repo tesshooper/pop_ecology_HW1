@@ -3,19 +3,19 @@ title: "Population Ecology HW1"
 author: "Tess Hooper"
 date: "1/15/2020"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
 ```
 
-# Question 1. Why might a plant or animal be patchily distributed? 
-1. Availability of resources (e.g. water, food) might affect where plants or animals are distributed. In this case I would expect the location of high-density patches to be inconsistent from year to year, as the resources may change. For instance, if certain foraging plants are abundant in one area, then that is where we might find ungulates in a given year. However, if they deplete that resource then that group of ungulates may need to move locations. 
-2. Predation is another factor that affects many species. Prey species may form patchy groups to avoid predation. If resources remain consistent then I would expect high density areas to remain similar from year to year. 
+## Question 1. Why might a plant or animal be patchily distributed? 
+* Availability of resources (e.g. water, food) will affect where plants or animals are distributed. In this case I would expect the location of high-density patches to be inconsistent from year to year, as the resources may change. For instance, if certain foraging plants are abundant in one area, then that is where we might find ungulates in a given year. However, if they deplete that resource then that group of ungulates may need to move locations. 
+* Predation is another factor that affects many species. Prey species may form patchy groups to avoid predation. If resources remain consistent then I would expect high density areas to remain similar from year to year. 
 
-3. 
+* Plants are static and therefore cannot move patches. Depending on their seed dispersal capabilities, the patches will remain relatively the same year to year. 
 
 ```{r load packages, echo = FALSE, message = FALSE, warning=FALSE}
 
@@ -32,14 +32,13 @@ swallenia2 <- read_csv("Swallenia (1).csv")
 
 <br>
 
-# Question 2: Eureaka Dune Grass
-A. For this analysis I chose 0.05 as my alpha value because this is a common standard that we have used in the past (e.g. Allison's class). The t-test resulted in a p-value of 0.4245. Based on this analysis, there was no significant change in mean abundance of Swallenia between 2009 and 2010, since this p-value was greater than 0.05.
-```{r, A: two-sample t-test, echo = FALSE, message = FALSE, results=TRUE}
+## Question 2: Eureaka Dune Grass
+```{r, A: two-sample t-test, echo = FALSE, message = FALSE}
 
 # A. Change in mean abundance from 2009 to 2010 using a two-sample t-test
 
 
-swallenia_ttest <- t.test(swallenia2$count_2009, swallenia2$count_2010)
+swallenia_ttest <- t.test(swallenia2$count_2009, swallenia2$count_2010, var.equal = TRUE)
 
 swallenia_ttest
 
@@ -52,10 +51,10 @@ swallenia_ttest
 #### Results ####
 
 #data:  swallenia2$count_2009 and swallenia2$count_2010
-#t = -0.81791, df = 17.37, p-value = 0.4245
+#t = -0.81791, df = 17.37, p-value = 0.423
 #alternative hypothesis: true difference in means is not equal to 0
 #95 percent confidence interval:
-# -141.06385   62.15476
+# -140.07803   62.16893
 #sample estimates:
 #mean of x mean of y 
 # 61.90909 101.36364 
@@ -65,10 +64,12 @@ swallenia_ttest
 ## For this analysis I chose 0.05 as my alpha value because this is a common standard that we have used in the past (e.g. Allison's class). The t-test resulted in a p-value of 0.4245. Based on this analysis, there was no significant change in mean abundance of Swallenia between 2009 and 2010, since this p-value was greater than 0.05. 
 
 ```
+A. For this analysis I chose $\alpha = 0.05$ value because this is a common standard that we have used in the past (e.g. Allison's class). The t-test results show (p = `r round(swallenia_ttest$p.value, 2)`). Based on this analysis, there was no significant change in mean abundance of Swallenia between 2009 and 2010, since this p-value was greater than 0.05.
+
 
 <br>
 
-B. When conducting a two-sided paired t-test, the resulting p-value is 0.03421. This gives us enough evidence to reject the null hypothesis, meaning we have sufficient evidence to suggest that there is a significant difference in mean abundance between 2009 and 2010. The mean of the differences is -39.45, indicating that there was a decline in mean abudnace between the two years. 
+
 
 ```{r, B: two-sample paired t-test, echo = FALSE, message = FALSE, results = TRUE }
 
@@ -99,12 +100,18 @@ swall_paired_ttest
 # When conducting a two-sided paired t-test, the resulting p-value is 0.03421. This gives us enough evidence to reject the null hypothesis, meaning we have sufficient evidence to suggest that there is a significant difference in mean abundance between 2009 and 2010. The mean of the differences is -39.45, indicating that there was a decline in mean abudnace between the two years. 
 
 ```
-
-C. I believe the paired t-test is more appropriate for this analysis.  **********
+B. When conducting a two-sided paired t-test, the resulting p-value is 0.03421. This gives us enough evidence to reject the null hypothesis, meaning we have sufficient evidence to suggest that there is a significant difference in mean abundance between 2009 and 2010. The mean of the differences is -39.45, indicating that there was a decline in mean abudnace between the two years. 
 
 <br>
 
-D. Paragraph to the park superintendant describing my findings
+C. I believe the paired t-test is more appropriate for this analysis because the plants are counted in the same plots each year. Therefore, the count for year 2 in a plot would be associated with the count from year 1 in the same plot. That being said, there may be additional growth in some plots due to seed dispersal from surrounding plots (depending on how the Eureka dunes proliferate). 
+
+
+<br>
+
+D. Letter to Superintendant of Death Valley National Park. 
+Dear Park Superintendant,
+  Upon evaluating the population of Eureka dune grass on Saline Dune between 2009 and 2010, I have concluded that there was a statistically significant decline in dune mean abundance. My team and I counted dune abundance within 11 plots across the dune study area throughout the 2009 and 2010. 
 
 <br>
 <br>
